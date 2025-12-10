@@ -61,6 +61,19 @@ ggplot(water_summary, aes(x = reorder(location_name, avg_liters_ppd), y = avg_li
   scale_fill_gradient(low = "lightblue", high = "darkblue") +
   labs(x = "Camp Name", y = "Average Liters per Person per Day", fill = "Liters") +
   theme_minimal()
+labs(x = "Camp Name", y = "Average Liters per Person per Day", fill = "Liters")
+library(knitr)
+
+summary_stats <- clean_data %>%
+  summarise(
+    avg_liters_ppd = mean(liters_ppd, na.rm = TRUE),
+    avg_households_with_toilet = mean(households_with_toilet, na.rm = TRUE),
+    total_refugee_population = sum(refugee_population, na.rm = TRUE)
+  )
+write_csv(processed_data, here::here("data/processed/my_processed_data.csv"))
+# Conclusions
+
+
 
 
 ```
