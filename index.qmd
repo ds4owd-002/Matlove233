@@ -46,152 +46,15 @@ library(tidyverse)
 library(tidyverse)
 library(lubridate)
 library(here)
-
 # Load data
+raw_data <- read_csv(here::here("data/raw/unhcrwash.csv"))# Load data
 raw_data <- read_csv(here::here("data/raw/unhcrwash.csv"))
-```
-```{r}
-#| warning: true
-raw_data <- read_csv(here::here("data/raw/unhcrwash.csv"))
-# Load libraries
-library(tidyverse)
-library(lubridate)
-library(here)
-
-# Load dataset
-raw_data <- read_csv(here("data/raw/unhcrwash.csv"))
-clean_data <- raw_data %>%
-  rename(
-    form_id                       = form_id,
-    start_date                    = start_date,
-    end_date                      = end_date,
-    location_id                   = location_id,
-    location_name                 = location_name,
-    country                       = country,
-    post_emergency                = post_emergency,
-    
-    persons_per_handpump          = persons_per_handpump,
-    persons_per_tap               = persons_per_tap,
-    
-    liters_ppd                    = liters_per_person_per_day,
-    non_chlorinated_0_cfu         = non_chlorinated_0_cfu,
-    chlorinated_water_quality     = chlorinated_safe_water_quality,
-    
-    households_with_toilet        = households_with_toilet,
-    persons_per_toilet            = persons_per_toilet,
-    persons_per_shower            = persons_per_shower,
-    persons_per_hygiene_promoter  = persons_per_hygiene_promoter,
-    
-    refugee_population            = refugee_pop,
-    reporting_monthly             = reporting_monthly,
-    
-    liters_pp_household           = liters_per_person_household,
-    potable_storage_10l           = potable_water_storage_10l,
-    
-    protected_water_sources       = protected_water_sources,
-    menstrual_hygiene_satisfaction = menstrual_hygiene_satisfaction,
-    
-    household_toilet              = household_toilet,
-    defecate_in_toilet            = defecate_in_toilet,
-    access_to_soap                = access_to_soap,
-    solid_waste_disposal_access   = solid_waste_disposal_access,
-    
-    reporting_annual              = reporting_annual
-  )
-
-#-----------------------------------------
-clean_data <- clean_data %>%
-  select(
-    form_id, location_id, location_name, country,
-    start_date, end_date, post_emergency,
-    persons_per_handpump, persons_per_tap,
-    liters_ppd, non_chlorinated_0_cfu, chlorinated_water_quality,
-    households_with_toilet, persons_per_toilet, persons_per_shower,
-    persons_per_hygiene_promoter, refugee_population, reporting_monthly,
-    liters_pp_household, potable_storage_10l, protected_water_sources,
-    menstrual_hygiene_satisfaction, household_toilet, defecate_in_toilet,
-    access_to_soap, solid_waste_disposal_access, reporting_annual
-  )
-
-#-----------------------------------------
-# 3. HANDLE MISSING VALUES
-#-----------------------------------------
-# Remove rows with critical missing values
-clean_data <- clean_data %>%
-  drop_na(form_id, location_name, liters_ppd, households_with_toilet)
-
-#-----------------------------------------
-# 4. JOIN WITH OTHER DATASETS (EXAMPLE)
-#-----------------------------------------
-# Example: join with district population data
-# population_data <- read_csv(here("data/raw/district_population.csv"))
-# clean_data <- clean_data %>%
-#   left_join(population_data, by = "location_name")
-
-#-----------------------------------------
-# 5. CREATE NEW VARIABLES
-#-----------------------------------------
-clean_data <- clean_data %>%
-  mutate(
-    start_date = ymd(start_date),
-    end_date   = ymd(end_date),
-    year       = year(start_date),
-    month      = month(start_date, label = TRUE),
-    
-    # Water classification
-    water_category = case_when(
-      protected_water_sources %in% c("Borehole", "Piped Water", "Protected Well") ~ "Improved",
-      TRUE ~ "Unimproved"
-    ),
-    
-    # Sanitation classification
-    sanitation_category = case_when(
-      households_with_toilet > 0 ~ "Improved",
-      TRUE ~ "Unimproved"
-    ),
-    
-    # Example: water availability per person per day
-    water_per_person_day = liters_ppd,
-    
-    # Example: total household water storage
-    total_household_storage_liters = liters_pp_household * households_with_toilet
-  )
-
-#-----------------------------------------
-# 6. FINAL CLEANED DATA PREVIEW
-#-----------------------------------------
-glimpse(clean_data)
-library(tidyverse)
-library(here)
-
-# Process the data
-processed_data <- raw_data %>%
-  # Select only relevant columns (replace with actual column names)
-  select(form_id, location_name, start_date, liters_per_person_per_day, households_with_toilet) %>%
-  
-  # Remove rows with missing values in critical columns
-  filter(!is.na(form_id), !is.na(location_name)) %>%
-  
-  # Rename columns if needed
-  rename(
-    household_id = form_id,
-    camp_name    = location_name,
-    water_lppd   = liters_per_person_per_day,
-    toilets      = households_with_toilet
-  )
-
-# Save the processed dataset
-write_csv(
-  processed_data,
-  here::here("data/processed/my_processed_data.csv")
-)
-#| warning: false
-# Summarize water availability by camp
+processed_data <- read_csv(here::here("data/processed/my_processed_data.csv"))
+#| fig.cap="Average liters of water per person per day by camp", fig.align='center'
 water_summary <- clean_data %>%
   group_by(location_name) %>%
   summarise(avg_liters_ppd = mean(liters_ppd, na.rm = TRUE))
-#| fig.cap="Average liters of water per person per day by camp", fig.align='center'
-# Plot water availability
+
 ggplot(water_summary, aes(x = reorder(location_name, avg_liters_ppd), y = avg_liters_ppd, fill = avg_liters_ppd)) +
   geom_col() +
   coord_flip() +
@@ -199,3 +62,239 @@ ggplot(water_summary, aes(x = reorder(location_name, avg_liters_ppd), y = avg_li
   labs(x = "Camp Name", y = "Average Liters per Person per Day", fill = "Liters") +
   theme_minimal()
 
+
+```
+
+\`\`\`{r} #\| warning: true raw_data \<- read_csv(here::here("data/raw/unhcrwash.csv")) \# Load libraries library(tidyverse) library(lubridate) library(here)
+
+# Load dataset
+
+raw_data \<- read_csv(here("data/raw/unhcrwash.csv")) clean_data \<- raw_data %\>% rename( form_id = form_id, start_date = start_date, end_date = end_date, location_id = location_id, location_name = location_name, country = country, post_emergency = post_emergency,
+
+```         
+persons_per_handpump          = persons_per_handpump,
+persons_per_tap               = persons_per_tap,
+
+liters_ppd                    = liters_per_person_per_day,
+non_chlorinated_0_cfu         = non_chlorinated_0_cfu,
+chlorinated_water_quality     = chlorinated_safe_water_quality,
+
+households_with_toilet        = households_with_toilet,
+persons_per_toilet            = persons_per_toilet,
+persons_per_shower            = persons_per_shower,
+persons_per_hygiene_promoter  = persons_per_hygiene_promoter,
+
+refugee_population            = refugee_pop,
+reporting_monthly             = reporting_monthly,
+
+liters_pp_household           = liters_per_person_household,
+potable_storage_10l           = potable_water_storage_10l,
+
+protected_water_sources       = protected_water_sources,
+menstrual_hygiene_satisfaction = menstrual_hygiene_satisfaction,
+
+household_toilet              = household_toilet,
+defecate_in_toilet            = defecate_in_toilet,
+access_to_soap                = access_to_soap,
+solid_waste_disposal_access   = solid_waste_disposal_access,
+
+reporting_annual              = reporting_annual
+```
+
+) #----------------------------------------- clean_data \<- clean_data %\>% select( form_id, location_id, location_name, country, start_date, end_date, post_emergency, persons_per_handpump, persons_per_tap, liters_ppd, non_chlorinated_0_cfu, chlorinated_water_quality, households_with_toilet, persons_per_toilet, persons_per_shower, persons_per_hygiene_promoter, refugee_population, reporting_monthly, liters_pp_household, potable_storage_10l, protected_water_sources, menstrual_hygiene_satisfaction, household_toilet, defecate_in_toilet, access_to_soap, solid_waste_disposal_access, reporting_annual )
+
+#----------------------------------------- \# 3. HANDLE MISSING VALUES #----------------------------------------- \# Remove rows with critical missing values clean_data \<- clean_data %\>% drop_na(form_id, location_name, liters_ppd, households_with_toilet)
+
+#----------------------------------------- \# 4. JOIN WITH OTHER DATASETS (EXAMPLE) #----------------------------------------- \# Example: join with district population data \# population_data \<- read_csv(here("data/raw/district_population.csv")) \# clean_data \<- clean_data %\>% \# left_join(population_data, by = "location_name")
+
+#----------------------------------------- \# 5. CREATE NEW VARIABLES #----------------------------------------- clean_data \<- clean_data %\>% mutate( start_date = ymd(start_date), end_date = ymd(end_date), year = year(start_date), month = month(start_date, label = TRUE),
+
+```         
+# Water classification
+water_category = case_when(
+  protected_water_sources %in% c("Borehole", "Piped Water", "Protected Well") ~ "Improved",
+  TRUE ~ "Unimproved"
+),
+
+# Sanitation classification
+sanitation_category = case_when(
+  households_with_toilet > 0 ~ "Improved",
+  TRUE ~ "Unimproved"
+),
+
+# Example: water availability per person per day
+water_per_person_day = liters_ppd,
+
+# Example: total household water storage
+total_household_storage_liters = liters_pp_household * households_with_toilet
+```
+
+)
+
+#----------------------------------------- \# 6. FINAL CLEANED DATA PREVIEW #----------------------------------------- glimpse(clean_data) library(tidyverse) library(here)
+
+# Process the data
+
+processed_data \<- raw_data %\>% \# Select only relevant columns (replace with actual column names) select(form_id, location_name, start_date, liters_per_person_per_day, households_with_toilet) %\>%
+
+\# Remove rows with missing values in critical columns filter(!is.na(form_id), !is.na(location_name)) %\>%
+
+\# Rename columns if needed rename( household_id = form_id, camp_name = location_name, water_lppd = liters_per_person_per_day, toilets = households_with_toilet )
+
+# Save the processed dataset
+
+write_csv( processed_data, here::here("data/processed/my_processed_data.csv") ) \# Summarize water availability by camp water_summary \<- clean_data %\>% group_by(location_name) %\>% summarise(avg_liters_ppd = mean(liters_ppd, na.rm = TRUE)) #\| fig.cap="Average liters of water per person per day by camp", fig.align='center' \# Plot water availability ggplot(water_summary, aes(x = reorder(location_name, avg_liters_ppd), y = avg_liters_ppd, fill = avg_liters_ppd)) + geom_col() + coord_flip() + scale_fill_gradient(low = "lightblue", high = "darkblue") + labs(x = "Camp Name", y = "Average Liters per Person per Day", fill = "Liters") + theme_minimal()
+
+```         
+
+\`\`\`{r} #\| warning: true raw_data \<- read_csv(here::here("data/raw/unhcrwash.csv")) \# Load libraries library(tidyverse) library(lubridate) library(here)
+
+# Load dataset
+
+raw_data \<- read_csv(here("data/raw/unhcrwash.csv")) clean_data \<- raw_data %\>% rename( form_id = form_id, start_date = start_date, end_date = end_date, location_id = location_id, location_name = location_name, country = country, post_emergency = post_emergency,
+```
+
+persons_per_handpump = persons_per_handpump, persons_per_tap = persons_per_tap,
+
+liters_ppd = liters_per_person_per_day, non_chlorinated_0_cfu = non_chlorinated_0_cfu, chlorinated_water_quality = chlorinated_safe_water_quality,
+
+households_with_toilet = households_with_toilet, persons_per_toilet = persons_per_toilet, persons_per_shower = persons_per_shower, persons_per_hygiene_promoter = persons_per_hygiene_promoter,
+
+refugee_population = refugee_pop, reporting_monthly = reporting_monthly,
+
+liters_pp_household = liters_per_person_household, potable_storage_10l = potable_water_storage_10l,
+
+protected_water_sources = protected_water_sources, menstrual_hygiene_satisfaction = menstrual_hygiene_satisfaction,
+
+household_toilet = household_toilet, defecate_in_toilet = defecate_in_toilet, access_to_soap = access_to_soap, solid_waste_disposal_access = solid_waste_disposal_access,
+
+reporting_annual = reporting_annual
+
+```         
+
+) #----------------------------------------- clean_data \<- clean_data %\>% select( form_id, location_id, location_name, country, start_date, end_date, post_emergency, persons_per_handpump, persons_per_tap, liters_ppd, non_chlorinated_0_cfu, chlorinated_water_quality, households_with_toilet, persons_per_toilet, persons_per_shower, persons_per_hygiene_promoter, refugee_population, reporting_monthly, liters_pp_household, potable_storage_10l, protected_water_sources, menstrual_hygiene_satisfaction, household_toilet, defecate_in_toilet, access_to_soap, solid_waste_disposal_access, reporting_annual )
+
+#----------------------------------------- \# 3. HANDLE MISSING VALUES #----------------------------------------- \# Remove rows with critical missing values clean_data \<- clean_data %\>% drop_na(form_id, location_name, liters_ppd, households_with_toilet)
+
+#----------------------------------------- \# 4. JOIN WITH OTHER DATASETS (EXAMPLE) #----------------------------------------- \# Example: join with district population data \# population_data \<- read_csv(here("data/raw/district_population.csv")) \# clean_data \<- clean_data %\>% \# left_join(population_data, by = "location_name")
+
+#----------------------------------------- \# 5. CREATE NEW VARIABLES #----------------------------------------- clean_data \<- clean_data %\>% mutate( start_date = ymd(start_date), end_date = ymd(end_date), year = year(start_date), month = month(start_date, label = TRUE),
+```
+
+# Water classification
+
+water_category = case_when( protected_water_sources %in% c("Borehole", "Piped Water", "Protected Well") \~ "Improved", TRUE \~ "Unimproved" ),
+
+# Sanitation classification
+
+sanitation_category = case_when( households_with_toilet \> 0 \~ "Improved", TRUE \~ "Unimproved" ),
+
+# Example: water availability per person per day
+
+water_per_person_day = liters_ppd,
+
+# Example: total household water storage
+
+total_household_storage_liters = liters_pp_household \* households_with_toilet
+
+```         
+
+)
+
+#----------------------------------------- \# 6. FINAL CLEANED DATA PREVIEW #----------------------------------------- glimpse(clean_data) library(tidyverse) library(here)
+
+# Process the data
+
+processed_data \<- raw_data %\>% \# Select only relevant columns (replace with actual column names) select(form_id, location_name, start_date, liters_per_person_per_day, households_with_toilet) %\>%
+
+\# Remove rows with missing values in critical columns filter(!is.na(form_id), !is.na(location_name)) %\>%
+
+\# Rename columns if needed rename( household_id = form_id, camp_name = location_name, water_lppd = liters_per_person_per_day, toilets = households_with_toilet )
+
+# Save the processed dataset
+
+write_csv( processed_data, here::here("data/processed/my_processed_data.csv") ) \# Summarize water availability by camp water_summary \<- clean_data %\>% group_by(location_name) %\>% summarise(avg_liters_ppd = mean(liters_ppd, na.rm = TRUE)) #\| fig.cap="Average liters of water per person per day by camp", fig.align='center' \# Plot water availability ggplot(water_summary, aes(x = reorder(location_name, avg_liters_ppd), y = avg_liters_ppd, fill = avg_liters_ppd)) + geom_col() + coord_flip() + scale_fill_gradient(low = "lightblue", high = "darkblue") + labs(x = "Camp Name", y = "Average Liters per Person per Day", fill = "Liters") + theme_minimal()
+
+# Load data
+raw_data <- read_csv(here::here("data/raw/unhcrwash.csv"))
+```
+
+\`\`\`{r} #\| warning: true raw_data \<- read_csv(here::here("data/raw/unhcrwash.csv")) \# Load libraries library(tidyverse) library(lubridate) library(here)
+
+# Load dataset
+
+raw_data \<- read_csv(here("data/raw/unhcrwash.csv")) clean_data \<- raw_data %\>% rename( form_id = form_id, start_date = start_date, end_date = end_date, location_id = location_id, location_name = location_name, country = country, post_emergency = post_emergency,
+
+```         
+persons_per_handpump          = persons_per_handpump,
+persons_per_tap               = persons_per_tap,
+
+liters_ppd                    = liters_per_person_per_day,
+non_chlorinated_0_cfu         = non_chlorinated_0_cfu,
+chlorinated_water_quality     = chlorinated_safe_water_quality,
+
+households_with_toilet        = households_with_toilet,
+persons_per_toilet            = persons_per_toilet,
+persons_per_shower            = persons_per_shower,
+persons_per_hygiene_promoter  = persons_per_hygiene_promoter,
+
+refugee_population            = refugee_pop,
+reporting_monthly             = reporting_monthly,
+
+liters_pp_household           = liters_per_person_household,
+potable_storage_10l           = potable_water_storage_10l,
+
+protected_water_sources       = protected_water_sources,
+menstrual_hygiene_satisfaction = menstrual_hygiene_satisfaction,
+
+household_toilet              = household_toilet,
+defecate_in_toilet            = defecate_in_toilet,
+access_to_soap                = access_to_soap,
+solid_waste_disposal_access   = solid_waste_disposal_access,
+
+reporting_annual              = reporting_annual
+```
+
+) #----------------------------------------- clean_data \<- clean_data %\>% select( form_id, location_id, location_name, country, start_date, end_date, post_emergency, persons_per_handpump, persons_per_tap, liters_ppd, non_chlorinated_0_cfu, chlorinated_water_quality, households_with_toilet, persons_per_toilet, persons_per_shower, persons_per_hygiene_promoter, refugee_population, reporting_monthly, liters_pp_household, potable_storage_10l, protected_water_sources, menstrual_hygiene_satisfaction, household_toilet, defecate_in_toilet, access_to_soap, solid_waste_disposal_access, reporting_annual )
+
+#----------------------------------------- \# 3. HANDLE MISSING VALUES #----------------------------------------- \# Remove rows with critical missing values clean_data \<- clean_data %\>% drop_na(form_id, location_name, liters_ppd, households_with_toilet)
+
+#----------------------------------------- \# 4. JOIN WITH OTHER DATASETS (EXAMPLE) #----------------------------------------- \# Example: join with district population data \# population_data \<- read_csv(here("data/raw/district_population.csv")) \# clean_data \<- clean_data %\>% \# left_join(population_data, by = "location_name")
+
+#----------------------------------------- \# 5. CREATE NEW VARIABLES #----------------------------------------- clean_data \<- clean_data %\>% mutate( start_date = ymd(start_date), end_date = ymd(end_date), year = year(start_date), month = month(start_date, label = TRUE),
+
+```         
+# Water classification
+water_category = case_when(
+  protected_water_sources %in% c("Borehole", "Piped Water", "Protected Well") ~ "Improved",
+  TRUE ~ "Unimproved"
+),
+
+# Sanitation classification
+sanitation_category = case_when(
+  households_with_toilet > 0 ~ "Improved",
+  TRUE ~ "Unimproved"
+),
+
+# Example: water availability per person per day
+water_per_person_day = liters_ppd,
+
+# Example: total household water storage
+total_household_storage_liters = liters_pp_household * households_with_toilet
+```
+
+)
+
+#----------------------------------------- \# 6. FINAL CLEANED DATA PREVIEW #----------------------------------------- glimpse(clean_data) library(tidyverse) library(here)
+
+# Process the data
+
+processed_data \<- raw_data %\>% \# Select only relevant columns (replace with actual column names) select(form_id, location_name, start_date, liters_per_person_per_day, households_with_toilet) %\>%
+
+\# Remove rows with missing values in critical columns filter(!is.na(form_id), !is.na(location_name)) %\>%
+
+\# Rename columns if needed rename( household_id = form_id, camp_name = location_name, water_lppd = liters_per_person_per_day, toilets = households_with_toilet )
+
+# Save the processed dataset
+
+write_csv( processed_data, here::here("data/processed/my_processed_data.csv") ) \# Summarize water availability by camp water_summary \<- clean_data %\>% group_by(location_name) %\>% summarise(avg_liters_ppd = mean(liters_ppd, na.rm = TRUE)) #\| fig.cap="Average liters of water per person per day by camp", fig.align='center' \# Plot water availability ggplot(water_summary, aes(x = reorder(location_name, avg_liters_ppd), y = avg_liters_ppd, fill = avg_liters_ppd)) + geom_col() + coord_flip() + scale_fill_gradient(low = "lightblue", high = "darkblue") + labs(x = "Camp Name", y = "Average Liters per Person per Day", fill = "Liters") + theme_minimal()
