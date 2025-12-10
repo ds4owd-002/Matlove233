@@ -47,8 +47,6 @@ library(here)
 # Load data
 raw_data <- read_csv(here::here("data/raw/unhcrwash.csv"))
 `
-
-
 ```
 
 ```{r}
@@ -185,5 +183,17 @@ write_csv(
   processed_data,
   here::here("data/processed/my_processed_data.csv")
 )
+---
+title: "UNHCR WASH Capstone Project"
+author: "Matlove Chipapi"
+date: "2025-12-10"
+format: html
+toc: true
+toc-location: left
+execute:
+  warning: false
+  echo: true
+bibliography: bibliography.bib
+---
 
-```
+
