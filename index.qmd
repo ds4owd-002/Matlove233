@@ -1,13 +1,29 @@
 ---
 title: "UNHCR WASH Capstone Project"
 author: "Matlove23"
+date: "`r Sys.Date()`"
 format: html
 editor: visual
 toc: true
 toc-location: left
+toc-depth: 2
+number-sections: true
+bibliography: references.bib
 execute:
   warning: false
   echo: true
+---
+# Introduction
+
+This report analyzes UNHCR WASH assessment data collected from refugee settings.  
+The data captures key indicators such as water quantity, water quality, sanitation access, hygiene conditions, and population characteristics.  
+The goal of this capstone is to prepare the data, analyze trends, and draw insights that inform humanitarian WASH programming.
+
+# Methods
+
+The dataset was obtained from the UNHCR WASH raw dataset stored in the `data/raw/` folder.  
+Data was imported, cleaned, renamed, filtered, and transformed using `tidyverse` tools.  
+Processed analysis-ready data is stored in `data/processed/` along with a README and a data dictionary.
 ---
 
 title: "My Data Analysis Report" format: html ---
@@ -46,32 +62,107 @@ library(tidyverse)
 library(tidyverse)
 library(lubridate)
 library(here)
-# Load data
-raw_data <- read_csv(here::here("data/raw/unhcrwash.csv"))# Load data
-raw_data <- read_csv(here::here("data/raw/unhcrwash.csv"))
+# Load raw data
+raw_data <- read_csv(here("data/raw/unhcrwash.csv"))
+# Preview the data
+glimpse(raw_data)
+# Load processed data
 processed_data <- read_csv(here::here("data/processed/my_processed_data.csv"))
-#| fig.cap="Average liters of water per person per day by camp", fig.align='center'
-water_summary <- clean_data %>%
-  group_by(location_name) %>%
-  summarise(avg_liters_ppd = mean(liters_ppd, na.rm = TRUE))
+names(processed_data)
+length(names(processed_data))
+dictionary <- tibble(
+  variable_name = names(processed_data),
+  description = rep("To be completed", length(names(processed_data)))
+)
 
-ggplot(water_summary, aes(x = reorder(location_name, avg_liters_ppd), y = avg_liters_ppd, fill = avg_liters_ppd)) +
-  geom_col() +
-  coord_flip() +
-  scale_fill_gradient(low = "lightblue", high = "darkblue") +
-  labs(x = "Camp Name", y = "Average Liters per Person per Day", fill = "Liters") +
-  theme_minimal()
-labs(x = "Camp Name", y = "Average Liters per Person per Day", fill = "Liters")
+write_csv(dictionary, here::here("data/processed/data_dictionary.csv"))
+#| label: summary-table
+#| tbl-cap: "Summary statistics for key variables."
+#| warning: false
+# Load necessary packages
+library(dplyr)
 library(knitr)
+colnames(processed_data)
 
-summary_stats <- clean_data %>%
+summary_table <- processed_data %>%
   summarise(
-    avg_liters_ppd = mean(liters_ppd, na.rm = TRUE),
-    avg_households_with_toilet = mean(households_with_toilet, na.rm = TRUE),
-    total_refugee_population = sum(refugee_population, na.rm = TRUE)
+    mean_liters = mean(water_lppd, na.rm = TRUE),
+    median_liters = median(water_lppd, na.rm = TRUE),
+    sd_liters = sd(water_lppd, na.rm = TRUE),
+    mean_toilets = mean(toilets, na.rm = TRUE)
   )
-write_csv(processed_data, here::here("data/processed/my_processed_data.csv"))
-# Conclusions
+
+kable(summary_table, caption = "Key WASH indicators summary.")
+
+#| label: fig-water
+#| fig-cap: "Distribution of water access (liters per person per day)."
+#| warning: false
+
+library(ggplot2)
+
+ggplot(processed_data, aes(x = water_lppd)) +
+  geom_histogram(bins = 20, fill = "steelblue", color = "black") +
+  labs(
+    x = "Liters per person per day",
+    y = "Count",
+    title = "Distribution of Water Access in Refugee Camps"
+  ) +
+  theme_minimal() +
+  scale_x_continuous()
+#| label: fig-quality
+#| fig-cap: "Water quality status across countries."
+#| warning: false
+#| label: fig-quality
+#| fig-cap: "Water quality status across countries."
+#| warning: false
+
+library(ggplot2)
+library(dplyr)
+
+# Make sure water quality is a factor
+processed_data <- raw_data %>%
+  select(form_id, location_name, start_date, liters_per_person_per_day, households_with_toilet) %>%
+  rename(
+    household_id = form_id,
+    camp_name = location_name,
+    water_lppd = liters_per_person_per_day,
+    toilets = households_with_toilet
+  )
+processed_data <- raw_data %>%
+  select(
+    form_id,
+    location_name,
+    start_date,
+    liters_per_person_per_day,
+    households_with_toilet,
+    chlorinated_safe_water_quality,
+    country
+  ) %>%
+  rename(
+    household_id = form_id,
+    camp_name = location_name,
+    water_lppd = liters_per_person_per_day,
+    toilets = households_with_toilet,
+    water_quality = chlorinated_safe_water_quality
+  )
+processed_data <- processed_data %>%
+  mutate(water_quality = factor(water_quality))
+
+# Plot
+ggplot(processed_data, aes(x = country, fill = water_quality)) +
+  geom_bar(position = "dodge") +
+  labs(
+    x = "Country",
+    y = "Number of Records",
+    fill = "Water Quality"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+
+
 
 
 
