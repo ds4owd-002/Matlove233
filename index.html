@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Matlove23">
+<meta name="dcterms.date" content="2025-12-11">
 
 <title>UNHCR WASH Capstone Project</title>
 <style>
@@ -82,15 +83,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
-  <li><a href="#analysis-goals" id="toc-analysis-goals" class="nav-link active" data-scroll-target="#analysis-goals">Analysis Goals</a></li>
-  <li><a href="#description-of-the-data" id="toc-description-of-the-data" class="nav-link" data-scroll-target="#description-of-the-data">Description of the Data</a></li>
-  <li><a href="#the-data-i-have-uploaded-contains-information-about-brief-description.-it-includes-variables-such-as-list-important-variables.-the-dataset-will-be-used-for-cleaning-exploration-visualisation-and-statistical-analysis-throughout-this-report." id="toc-the-data-i-have-uploaded-contains-information-about-brief-description.-it-includes-variables-such-as-list-important-variables.-the-dataset-will-be-used-for-cleaning-exploration-visualisation-and-statistical-analysis-throughout-this-report." class="nav-link" data-scroll-target="#the-data-i-have-uploaded-contains-information-about-brief-description.-it-includes-variables-such-as-list-important-variables.-the-dataset-will-be-used-for-cleaning-exploration-visualisation-and-statistical-analysis-throughout-this-report.">The data I have uploaded contains information about [brief description]. It includes variables such as [list important variables]. The dataset will be used for cleaning, exploration, visualisation, and statistical analysis throughout this report.</a></li>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto">Quarto</a></li>
-  <li><a href="#running-code" id="toc-running-code" class="nav-link" data-scroll-target="#running-code">Running Code</a></li>
-  <li><a href="#load-dataset" id="toc-load-dataset" class="nav-link" data-scroll-target="#load-dataset">Load dataset</a></li>
-  <li><a href="#process-the-data" id="toc-process-the-data" class="nav-link" data-scroll-target="#process-the-data">Process the data</a></li>
-  <li><a href="#save-the-processed-dataset" id="toc-save-the-processed-dataset" class="nav-link" data-scroll-target="#save-the-processed-dataset">Save the processed dataset</a></li>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> 1. Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods"><span class="header-section-number">2</span> 2.Methods</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">3</span> 3. Results</a>
+  <ul class="collapse">
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><span class="header-section-number">3.1</span> 3.1 Load Data</a></li>
+  </ul></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"><span class="header-section-number">4</span> 4. Conclusions</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5</span> 5. References</a></li>
   </ul>
 </nav>
 </div>
@@ -114,6 +115,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 11, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -123,112 +130,188 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>title: “My Data Analysis Report” format: html —</p>
-<section id="analysis-goals" class="level2">
-<h2 class="anchored" data-anchor-id="analysis-goals">Analysis Goals</h2>
-<p>In this project, my goal is to analyse the uploaded dataset to understand key patterns and insights. Specifically, I aim to identify trends, make comparisons, generate visualisations, and answer the main research questions related to the data.</p>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 1. Introduction</h1>
+<p>This report analyzes UNHCR WASH assessment data collected from refugee settings.<br>
+The data captures key indicators such as water quantity, water quality, sanitation access, hygiene conditions, and population characteristics.<br>
+The goal of this capstone is to analyze the <strong>processed dataset</strong>, explore trends, and generate insights for humanitarian WASH programming.</p>
 </section>
-<section id="description-of-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="description-of-the-data">Description of the Data</h2>
-</section>
-<section id="the-data-i-have-uploaded-contains-information-about-brief-description.-it-includes-variables-such-as-list-important-variables.-the-dataset-will-be-used-for-cleaning-exploration-visualisation-and-statistical-analysis-throughout-this-report." class="level2">
-<h2 class="anchored" data-anchor-id="the-data-i-have-uploaded-contains-information-about-brief-description.-it-includes-variables-such-as-list-important-variables.-the-dataset-will-be-used-for-cleaning-exploration-visualisation-and-statistical-analysis-throughout-this-report.">The data I have uploaded contains information about [brief description]. It includes variables such as [list important variables]. The dataset will be used for cleaning, exploration, visualisation, and statistical analysis throughout this report.</h2>
-</section>
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
-</section>
-<section id="running-code" class="level2">
-<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
+<section id="methods" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 2.Methods</h1>
+<p>Raw data were collected from UNHCR WASH assessments and stored in the <code>data/raw/</code> folder.<br>
+</p>
+<p>Data cleaning, variable renaming, and standardization were performed to produce analysis-ready processed data stored in <code>data/processed/</code>.<br>
+</p>
+<p>All variables are documented in a data dictionary, and missing values were handled appropriately.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load raw data</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/raw/unhcrwash.csv"</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load processed data</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>processed_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/processed/my_processed_data.csv"</span>))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data dictionary if it doesn't exist</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">here</span>(<span class="st">"data/processed/data_dictionary.csv"</span>))) {</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="at">variable_name =</span> <span class="fu">names</span>(processed_data),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="at">description =</span> <span class="fu">rep</span>(<span class="st">"To be completed"</span>, <span class="fu">length</span>(<span class="fu">names</span>(processed_data)))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(dictionary, <span class="fu">here</span>(<span class="st">"data/processed/data_dictionary.csv"</span>))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Load raw data</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/raw/unhcrwash.csv"</span>))</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Load processed data</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>processed_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/processed/my_processed_data.csv"</span>))</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data dictionary if it doesn't exist</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">here</span>(<span class="st">"data/processed/data_dictionary.csv"</span>))) {</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="at">variable_name =</span> <span class="fu">names</span>(processed_data),</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="at">description =</span> <span class="fu">rep</span>(<span class="st">"To be completed"</span>, <span class="fu">length</span>(<span class="fu">names</span>(processed_data)))</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(dictionary, <span class="fu">here</span>(<span class="st">"data/processed/data_dictionary.csv"</span>))</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The dataset used is the <strong>processed, cleaned dataset</strong> stored in <code>data/processed/my_processed_data.csv</code>.<br>
+All further analyses, summaries, and visualizations use this dataset directly</p>
+</section>
+<section id="results" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 3. Results</h1>
+<section id="load-data" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="load-data"><span class="header-section-number">3.1</span> 3.1 Load Data</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load processed data</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>processed_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/processed/my_processed_data.csv"</span>))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview processed data</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(processed_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>Rows: 6,423
+Columns: 5
+$ household_id &lt;dbl&gt; 54418187, 54418188, 54418189, 54418190, 54414021, 5442098…
+$ camp_name    &lt;chr&gt; "Dagahaley", "Hagadera", "Ifo", "Ifo 2", "Buramino", "Lov…
+$ start_date   &lt;chr&gt; "1/1/2024", "1/1/2024", "1/1/2024", "1/1/2024", "12/2/202…
+$ water_lppd   &lt;dbl&gt; NA, NA, NA, NA, 9, 23, 50, 17, 115, 98, 20, 18, 17, 26, 1…
+$ toilets      &lt;dbl&gt; NA, NA, NA, NA, 9, 57, 100, 100, 100, 100, 53, 60, 57, 15…</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data dictionary (optional)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable_name =</span> <span class="fu">names</span>(processed_data),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="fu">rep</span>(<span class="st">"To be completed"</span>, <span class="fu">length</span>(<span class="fu">names</span>(processed_data)))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(dictionary, <span class="fu">here</span>(<span class="st">"data/processed/data_dictionary.csv"</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics for numeric columns (only if exist)</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"water_lppd"</span>, <span class="st">"toilets"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="ot">&lt;-</span> numeric_cols[numeric_cols <span class="sc">%in%</span> <span class="fu">names</span>(processed_data)]</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">length</span>(numeric_cols) <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  summary_table <span class="ot">&lt;-</span> processed_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(numeric_cols), <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))) </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(summary_table, <span class="at">caption =</span> <span class="st">"Summary statistics for key numeric variables"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Summary statistics for key numeric variables</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">water_lppd</th>
+<th style="text-align: right;">toilets</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">24.7299</td>
+<td style="text-align: right;">42.96187</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<p>You can add options to executable code like this</p>
+<p>Histogram:</p>
+<p>this histogram giving the results of various points</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram: water_lppd if exists</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="st">"water_lppd"</span> <span class="sc">%in%</span> <span class="fu">names</span>(processed_data)){</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(processed_data, <span class="fu">aes</span>(<span class="at">x =</span> water_lppd)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Liters per person per day"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Count"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Distribution of Water Access"</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
+</div>
+<p>BAR PLOT</p>
+<p>this bar plot is showing the results on diferent areas</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/raw/unhcrwash.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot: toilets by camp if columns exist</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">all</span>(<span class="fu">c</span>(<span class="st">"toilets"</span>, <span class="st">"camp_name"</span>) <span class="sc">%in%</span> <span class="fu">names</span>(processed_data))){</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(processed_data, <span class="fu">aes</span>(<span class="at">x =</span> camp_name, <span class="at">y =</span> toilets, <span class="at">fill =</span> camp_name)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Camp Name"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Number of Toilets"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Number of Toilets per Camp"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"Camp"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<p>#| warning: true raw_data &lt;- read_csv(here::here(“data/raw/unhcrwash.csv”)) # Load libraries library(tidyverse) library(lubridate) library(here)</p>
+</div>
+</div>
 </section>
-<section id="load-dataset" class="level1">
-<h1>Load dataset</h1>
-<p>raw_data &lt;- read_csv(here(“data/raw/unhcrwash.csv”)) clean_data &lt;- raw_data %&gt;% rename( form_id = form_id, start_date = start_date, end_date = end_date, location_id = location_id, location_name = location_name, country = country, post_emergency = post_emergency,</p>
-<pre><code>persons_per_handpump          = persons_per_handpump,
-persons_per_tap               = persons_per_tap,
-
-liters_ppd                    = liters_per_person_per_day,
-non_chlorinated_0_cfu         = non_chlorinated_0_cfu,
-chlorinated_water_quality     = chlorinated_safe_water_quality,
-
-households_with_toilet        = households_with_toilet,
-persons_per_toilet            = persons_per_toilet,
-persons_per_shower            = persons_per_shower,
-persons_per_hygiene_promoter  = persons_per_hygiene_promoter,
-
-refugee_population            = refugee_pop,
-reporting_monthly             = reporting_monthly,
-
-liters_pp_household           = liters_per_person_household,
-potable_storage_10l           = potable_water_storage_10l,
-
-protected_water_sources       = protected_water_sources,
-menstrual_hygiene_satisfaction = menstrual_hygiene_satisfaction,
-
-household_toilet              = household_toilet,
-defecate_in_toilet            = defecate_in_toilet,
-access_to_soap                = access_to_soap,
-solid_waste_disposal_access   = solid_waste_disposal_access,
-
-reporting_annual              = reporting_annual</code></pre>
-<p>)</p>
-<p>#—————————————– clean_data &lt;- clean_data %&gt;% select( form_id, location_id, location_name, country, start_date, end_date, post_emergency, persons_per_handpump, persons_per_tap, liters_ppd, non_chlorinated_0_cfu, chlorinated_water_quality, households_with_toilet, persons_per_toilet, persons_per_shower, persons_per_hygiene_promoter, refugee_population, reporting_monthly, liters_pp_household, potable_storage_10l, protected_water_sources, menstrual_hygiene_satisfaction, household_toilet, defecate_in_toilet, access_to_soap, solid_waste_disposal_access, reporting_annual )</p>
-<p>#—————————————– # 3. HANDLE MISSING VALUES #—————————————– # Remove rows with critical missing values clean_data &lt;- clean_data %&gt;% drop_na(form_id, location_name, liters_ppd, households_with_toilet)</p>
-<p>#—————————————– # 4. JOIN WITH OTHER DATASETS (EXAMPLE) #—————————————– # Example: join with district population data # population_data &lt;- read_csv(here(“data/raw/district_population.csv”)) # clean_data &lt;- clean_data %&gt;% # left_join(population_data, by = “location_name”)</p>
-<p>#—————————————– # 5. CREATE NEW VARIABLES #—————————————– clean_data &lt;- clean_data %&gt;% mutate( start_date = ymd(start_date), end_date = ymd(end_date), year = year(start_date), month = month(start_date, label = TRUE),</p>
-<pre><code># Water classification
-water_category = case_when(
-  protected_water_sources %in% c("Borehole", "Piped Water", "Protected Well") ~ "Improved",
-  TRUE ~ "Unimproved"
-),
-
-# Sanitation classification
-sanitation_category = case_when(
-  households_with_toilet &gt; 0 ~ "Improved",
-  TRUE ~ "Unimproved"
-),
-
-# Example: water availability per person per day
-water_per_person_day = liters_ppd,
-
-# Example: total household water storage
-total_household_storage_liters = liters_pp_household * households_with_toilet</code></pre>
-<p>)</p>
-<p>#—————————————– # 6. FINAL CLEANED DATA PREVIEW #—————————————– glimpse(clean_data) library(tidyverse) library(here)</p>
 </section>
-<section id="process-the-data" class="level1">
-<h1>Process the data</h1>
-<p>processed_data &lt;- raw_data %&gt;% # Select only relevant columns (replace with actual column names) select(form_id, location_name, start_date, liters_per_person_per_day, households_with_toilet) %&gt;%</p>
-<p># Remove rows with missing values in critical columns filter(!is.na(form_id), !is.na(location_name)) %&gt;%</p>
-<p># Rename columns if needed rename( household_id = form_id, camp_name = location_name, water_lppd = liters_per_person_per_day, toilets = households_with_toilet )</p>
+<section id="conclusions" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 4. Conclusions</h1>
+<ul>
+<li><p>Water access is below humanitarian standards in some camps.</p>
+<p>Toilet coverage is high overall, but gaps exist.</p>
+<p>Water quality varies by country, highlighting the need for targeted interventions.</p></li>
+</ul>
 </section>
-<section id="save-the-processed-dataset" class="level1">
-<h1>Save the processed dataset</h1>
-<p>write_csv( processed_data, here::here(“data/processed/my_processed_data.csv”) ) #| warning: false # Summarize water availability by camp water_summary &lt;- clean_data %&gt;% group_by(location_name) %&gt;% summarise(avg_liters_ppd = mean(liters_ppd, na.rm = TRUE)) #| fig.cap=“Average liters of water per person per day by camp”, fig.align=‘center’ # Plot water availability ggplot(water_summary, aes(x = reorder(location_name, avg_liters_ppd), y = avg_liters_ppd, fill = avg_liters_ppd)) + geom_col() + coord_flip() + scale_fill_gradient(low = “lightblue”, high = “darkblue”) + labs(x = “Camp Name”, y = “Average Liters per Person per Day”, fill = “Liters”) + theme_minimal()</p>
+<section id="references" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 5. References</h1>
 </section>
 
 </main>
