@@ -163,7 +163,7 @@ if(all(c("toilets", "camp_name") %in% names(processed_data))){
 
 ```
 
-# 4. Conclusions 
+# 4. Conclusions
 
 -   Water access is below humanitarian standards in some camps.
 
